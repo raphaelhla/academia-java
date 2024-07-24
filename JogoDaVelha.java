@@ -66,6 +66,7 @@ public class JogoDaVelha {
 
 	public static void jogar(Scanner sc) {
 		int linha, coluna;
+		boolean posicaoValida = false;
 		
 		do {
 			System.out.print("\nJogador " + jogador + " digite a linha da posicao desejada (0, 1, ou 2): ");
@@ -73,22 +74,24 @@ public class JogoDaVelha {
 		
 			System.out.print("Jogador " + jogador + " digite a coluna da posicao desejada (0, 1, ou 2): ");
 			coluna = sc.nextInt();
-		} while (jogadaInvalida(linha, coluna));
+			
+			posicaoValida = verificarValidadeDaPosicao(linha, coluna);
+			
+			if (!posicaoValida) { 	
+				System.out.println("\nPosicao inválida. Tente novamente.");
+			}
+		} while (!posicaoValida);
 		
-		if (jogador == 1)
-			tabuleiro[linha][coluna] = 'O';
-		else
-			tabuleiro[linha][coluna] = 'X';
-		
+		tabuleiro[linha][coluna] = (jogador == 1) ? 'O' : 'X';
 		jogadas++;
 	}
 	
-	public static boolean jogadaInvalida(int linha, int coluna) {
-		boolean linhaInvalida = linha < 0 | linha > 2;
-		boolean colunaInvalida = coluna < 0 || coluna > 2;
-		boolean posicaoInvalida = tabuleiro[linha][coluna] != ' ';
+	public static boolean verificarValidadeDaPosicao(int linha, int coluna) {
+		boolean linhaValida = linha >= 0 && linha <= 2;
+		boolean colunaValida = coluna >= 0 && coluna <= 2;
+		boolean posicaoValida = tabuleiro[linha][coluna] == ' ';
 		
-		return linhaInvalida || colunaInvalida || posicaoInvalida;
+		return linhaValida && colunaValida && posicaoValida;
 	}
 	
 	public static void imprimirTabuleiro() {
