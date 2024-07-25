@@ -29,9 +29,9 @@ public class Retangulo {
 	
 	public Retangulo() {
 		this.lado1 = 0;
-        this.lado2 = 0;
-        this.area = 0;
-        this.perimetro = 0;
+        	this.lado2 = 0;
+        	this.area = 0;
+       		this.perimetro = 0;
 	}
 	
 	public Retangulo(double lado1, double lado2) {
